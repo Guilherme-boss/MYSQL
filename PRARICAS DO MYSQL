@@ -1,1 +1,66 @@
+select * from tabela_de_vendedores;
 
+select bairro from tabela_de_vendedores;
+
+select tabela_de_vendedores.BAIRRO, tabela_de_vendedores.nome,
+tabela_de_clientes.bairro, tabela_de_clientes.NOME, DE_FERIAS
+from tabela_de_vendedores inner join 
+tabela_de_clientes;
+
+
+select tabela_de_vendedores.BAIRRO, 
+tabela_de_vendedores.nome,DE_FERIAS,
+tabela_de_clientes.bairro,
+tabela_de_clientes.NOME from tabela_de_vendedores LEFT join tabela_de_clientes
+ON tabela_de_vendedores.BAIRRO = tabela_de_clientes.Bairro;
+
+select tabela_de_vendedores.BAIRRO, 
+tabela_de_vendedores.nome,DE_FERIAS,
+tabela_de_clientes.bairro,
+tabela_de_clientes.NOME from tabela_de_vendedores RIGHT join tabela_de_clientes
+ON tabela_de_vendedores.BAIRRO = tabela_de_clientes.Bairro;
+
+select tabela_de_vendedores.BAIRRO, 
+tabela_de_vendedores.nome,DE_FERIAS,
+tabela_de_clientes.bairro,
+tabela_de_clientes.NOME from tabela_de_vendedores FULL join tabela_de_clientes
+ON tabela_de_vendedores.BAIRRO = tabela_de_clientes.Bairro;
+
+select tabela_de_vendedores.BAIRRO, 
+tabela_de_vendedores.nome,DE_FERIAS,
+tabela_de_clientes.bairro,
+tabela_de_clientes.NOME from tabela_de_vendedores ,tabela_de_clientes;
+
+
+----------------------------------------------------------------------------------------------------------------------
+union exemplos
+select distinct bairro from tabela_de_clientes;
+select distinct bairro from tabela_de_vendedores;
+
+select distinct bairro from tabela_de_clientes
+union
+select distinct bairro from tabela_de_vendedores;
+
+select distinct bairro from tabela_de_clientes
+union all
+select distinct bairro from tabela_de_vendedores;
+
+select distinct bairro,nome, 'clientes' as tipo from tabela_de_clientes
+union 
+select distinct bairro,nome, 'vendedores' as tipo from tabela_de_vendedores;
+
+
+select distinct bairro from tabela_de_vendedores;
+subconsultas.
+select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
+
+select x.embalagem,x.preco_maximo from
+(select embalagem, max(preco_de_lista)as preco_maximo from tabela_de_produtos
+group by EMBALAGEM) x where x.preco_maximo >= 10;
+
+
+  SELECT CPF, COUNT(*) FROM notas_fiscais
+  WHERE YEAR(DATA_VENDA) = 2016
+  GROUP BY CPF
+  HAVING COUNT(*) > 2000
+  ----------------------------------------------------------------------------------------------------
