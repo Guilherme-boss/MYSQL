@@ -1,3 +1,9 @@
+SELECT CPF, COUNT(*) FROM notas_fiscais
+  WHERE YEAR(DATA_VENDA) = 2016
+  GROUP BY CPF
+  HAVING COUNT(*) > 2000
+
+
 select * from tabela_de_vendedores;
 
 select bairro from tabela_de_vendedores;
@@ -6,6 +12,10 @@ select tabela_de_vendedores.BAIRRO, tabela_de_vendedores.nome,
 tabela_de_clientes.bairro, tabela_de_clientes.NOME, DE_FERIAS
 from tabela_de_vendedores inner join 
 tabela_de_clientes;
+
+SELECT A.BAIRRO, A.NOME,COUNT(*) FROM tabela_de_vendedores A 
+INNER JOIN notas_fiscais B ON A.BAIRRO = A.BAIRRO
+group by A.MATRICULA,A.NOME;
 
 
 select tabela_de_vendedores.BAIRRO, 
@@ -50,6 +60,8 @@ union
 select distinct bairro,nome, 'vendedores' as tipo from tabela_de_vendedores;
 
 
+EXEMPLO DE SUBCONSULTASS 
+
 select distinct bairro from tabela_de_vendedores;
 subconsultas.
 select * from tabela_de_clientes where bairro in (select distinct bairro from tabela_de_vendedores);
@@ -58,11 +70,16 @@ select x.embalagem,x.preco_maximo from
 (select embalagem, max(preco_de_lista)as preco_maximo from tabela_de_produtos
 group by EMBALAGEM) x where x.preco_maximo >= 10;
 
-
   SELECT CPF, COUNT(*) FROM notas_fiscais
   WHERE YEAR(DATA_VENDA) = 2016
   GROUP BY CPF
   HAVING COUNT(*) > 2000
+  
+  EXEMPLO DE VIEW 
+  SELECT A.NOME_DO_PRODUTO, A.EMBALAGEM, A.PRECO_DE_LISTA, X.MAIOR_PRECO
+  FROM tabela_de_produtos A INNER JOIN vw_maiores_embalagens X
+  ON A.EMBALAGEM = X.EMBALAGEM;
+
   ----------------------------------------------------------------------------------------------------
   comandos de string mySQL
   
