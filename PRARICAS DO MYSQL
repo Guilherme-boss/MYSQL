@@ -103,5 +103,24 @@ group by EMBALAGEM) x where x.preco_maximo >= 10;
 FROM tabela_de_clientes
  
  ----------------------------------------------------------------------------------------
- 
- 
+  CRIANDO USUARIO
+CREATE USER 'admin02'@'localhost' identified BY 'admin02';
+GRANT ALL PRIVILEGES ON *.* TO 'admin02'@'localhost' WITH GRANT OPTION;
+
+DROP USER 'root'@'localhost'; EXCLUIR USUARIO
+
+CRIANDO USUARIO NORMAL
+CREATE USER 'user02'@'localhost' identified BY 'user02';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES,
+LOCK TABLES, EXECUTE ON *.* TO 'user02'@'localhost';
+
+ADD COMANDOS AO USUARIO 
+CREATE USER 'user04'@'%' IDENTIFIED BY 'user04';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE TEMPORARY TABLES, LOCK TABLES, EXECUTE
+ON sucos_vendas.* TO 'user04'@'%';
+
+COMANDO QUE MOSTRA ACESSO AO USUARIO 
+SHOW GRANTS FOR 'user02'@'localhost';
+
+COMANDO QUE RETIRA PRIVÉLEGIOS
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'user02'@'localhost';
